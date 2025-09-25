@@ -1,7 +1,76 @@
-.App {
+h1 {
   text-align: center;
+  border: 2px, solid, white;
+  background-color: white;
+  max-width: 200px;
+  border-radius: 7px;
+  margin-left: 650px;
+  margin-top: 100px;
+  box-shadow: 1px 2px 15px 1px rgba(115,118,118,0.75);
+-webkit-box-shadow: 1px 2px 15px 1px rgba(115,118,118,0.75);
+-moz-box-shadow: 1px 2px 15px 1px rgba(115,118,118,0.75);
 }
 
+#inf{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  margin-top: 140px;
+  
+}
+
+#course{
+  border: 2px, solid, white;
+  text-align: center;
+  border-radius: 7px;
+  background-color: white;
+  width: 200px;
+  height: 200px;
+  padding: 40px;
+  box-shadow: 1px 2px 15px 1px rgba(115,118,118,0.75);
+-webkit-box-shadow: 1px 2px 15px 1px rgba(115,118,118,0.75);
+-moz-box-shadow: 1px 2px 15px 1px rgba(115,118,118,0.75);
+}
+
+#outlook{
+  border: 2px, solid, white;
+  text-align: center;
+  border-radius: 7px;
+  background-color: white;
+  width: 200px;
+  height: 200px;
+  padding: 40px;
+  box-shadow: 1px 2px 15px 1px rgba(115,118,118,0.75);
+-webkit-box-shadow: 1px 2px 15px 1px rgba(115,118,118,0.75);
+-moz-box-shadow: 1px 2px 15px 1px rgba(115,118,118,0.75);
+}
+
+#hobbies{
+  border: 2px, solid, white;
+  text-align: center;
+  border-radius: 7px;
+  background-color: white;
+  width: 200px;
+  height: 200px;
+  padding: 40px;
+  box-shadow: 1px 2px 15px 1px rgba(115,118,118,0.75);
+-webkit-box-shadow: 1px 2px 15px 1px rgba(115,118,118,0.75);
+-moz-box-shadow: 1px 2px 15px 1px rgba(115,118,118,0.75);
+}
+
+p{
+  font-size: larger;
+}
+h4{
+  font-size: larger;
+}
+
+body{
+  background-color: rgb(209, 231, 234);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color:#052054;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
