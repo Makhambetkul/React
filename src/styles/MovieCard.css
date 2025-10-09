@@ -1,0 +1,6 @@
+.card__title{
+    border-radius: 7px;
+    padding: 10px;
+    background-color: rgba(250, 155, 155);
+    color: rgb(252, 247, 241);
+}
