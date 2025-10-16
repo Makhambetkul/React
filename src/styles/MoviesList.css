@@ -33,6 +33,7 @@ button{
     padding: 10px;
     background-color: rgba(250, 155, 155);
     color: rgb(252, 247, 241); 
+    
 }
 
 .app h1{
@@ -42,4 +43,31 @@ button{
     padding-bottom: 30px;
     background-color: rgba(250, 155, 155);
     color: rgb(252, 247, 241);
+    min-width: 1550px;
 }
+
+
+.search input{
+    height:35px;
+    min-width: 300px;
+    border-radius: 7px;
+    margin:10px;
+    margin-left: 190px;
+    border:none;
+    background-color: rgb(252, 247, 241);
+    font-weight: bolder;
+    font-size: large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    color:rgba(250, 155, 155);
+    box-shadow: 1px 0px 17px 2px rgba(239,146,146,0.71);
+-webkit-box-shadow: 1px 0px 17px 2px rgba(239,146,146,0.71);
+-moz-box-shadow: 1px 0px 17px 2px rgba(239,146,146,0.71);
+}
+
+::placeholder{
+    color:rgba(250, 155, 155);
+}
+
+
+

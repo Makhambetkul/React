@@ -11,15 +11,16 @@ export default function App() {
     try {
       setLoading(true);
       setError("");
-      const res = await fetch("https://ghibliapi.vercel.app/films");
+      const res = await fetch("https://api.tvmaze.com/shows");
       if (!res.ok) throw new Error("Failed to fetch");
       const data = await res.json();
-      const list = data.map(m => ({
+      const list = data.slice(0, 30).map(m => ({
         id: m.id,
-        title: m.title,
-        year: m.release_date,
-        rtScore: m.rt_score,
-        desc: m.description,
+        title: m.name,
+        year: (m.premiered || "").slice(0, 4),
+        genres: (m.genres || []).join(", "),
+        plot: (m.summary || "").replace(/<[^>]+>/g, "").trim()
+        
       }));
       setItems(list);
     } catch {
