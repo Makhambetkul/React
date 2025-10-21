@@ -1,6 +1,6 @@
 import "../styles/MovieCard.css";
 
-export default function MovieCard({ title, year, genres, plot }) {
+export default function MovieCard({ title, year, director, genres, plot }) {
   return (
     <article className="card">
       <header className="card__header">
