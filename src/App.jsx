@@ -1,47 +1,25 @@
-import { useState } from "react";
-import MoviesList from "./components/MoviesList";      
-import "./styles/MoviesList.css";                      
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import RootLayout from "./layouts/RootLayout";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import MoviesList from "./pages/MoviesList";
+import MovieDetails from "./pages/MovieDetails";
+import Login from "./pages/Login";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      { path: "", element: <Home /> },
+      { path: "about", element: <About /> },
+      { path: "items", element: <MoviesList /> },
+      { path: "items/:id", element: <MovieDetails /> },
+      { path: "login", element: <Login /> },
+    ],
+  },
+]);
 
 export default function App() {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  const loadData = async () => {
-    try {
-      setLoading(true);
-      setError("");
-      const res = await fetch("https://api.tvmaze.com/shows");
-      if (!res.ok) throw new Error("Failed to fetch");
-      const data = await res.json();
-      const list = data.slice(0, 30).map(m => ({
-        id: m.id,
-        title: m.name,
-        year: (m.premiered || "").slice(0, 4),
-        genres: (m.genres || []).join(", "),
-        plot: (m.summary || "").replace(/<[^>]+>/g, "").trim()
-        
-      }));
-      setItems(list);
-    } catch {
-      setError("Could not load data. Try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <div className="app">
-      <h1>MoviesList</h1>
-
-      <button className="load-btn" onClick={loadData} disabled={loading}>
-        {loading ? "Loading..." : "Load"}
-      </button>
-
-      {error && <p className="error">{error}</p>}
-
-      {}
-      <MoviesList items={items} />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }

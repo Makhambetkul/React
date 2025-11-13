@@ -27,8 +27,6 @@ body{
 }
 button{
     font-weight: bolder;
-    margin-top: 20px;
-    margin-left:190px;
     width: 200px;
     padding: 10px;
     background-color: rgba(250, 155, 155);
