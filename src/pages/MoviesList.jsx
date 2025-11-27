@@ -1,67 +1,64 @@
-import { useState, useEffect, useMemo } from "react";
-import { searchMovies } from "../services/movieService";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchMovies, setQuery } from "../features/movies/moviesSlice";
 import MovieCard from "../components/MovieCard";
 import Spinner from "../components/Spinner";
 import ErrorBox from "../components/ErrorBox";
 import "../styles/MoviesList.css";
 
 export default function MoviesList() {
-  const [items, setItems] = useState([]);
-  const [query, setQuery] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const dispatch = useDispatch();
+
+  const {
+    list: items,
+    loadingList: loading,
+    errorList: error,
+    query,
+  } = useSelector((state) => state.movie);
 
   useEffect(() => {
-    setLoading(true);
-    setError("");
-    searchMovies()
-      .then(setItems)
-      .catch(() => setError("Could not load data. Try again."))
-      .finally(() => setLoading(false));
-  }, []);
+    const timer = setTimeout(() => {
+      dispatch(fetchMovies(query));
+    }, 400);
 
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return items;
-    return items.filter(it => (it.title || "").toLowerCase().includes(q));
-  }, [items, query]);
-
-  const clear = () => setQuery("");
-
-  if (loading) return <Spinner />;
-  if (error) return <ErrorBox message={error} />;
+    return () => clearTimeout(timer);
+  }, [query, dispatch]);
 
   return (
     <>
       <div className="search">
         <input
           type="text"
-          placeholder="Search by title…"
+          placeholder="Search for movies…"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={(e) => { if (e.key === "Escape") clear(); }}
+          onChange={(e) => dispatch(setQuery(e.target.value))}
         />
+
         {query && (
-          <button className="clear-btn" onClick={clear} aria-label="Clear search">
+          <button className="clear-btn" onClick={() => dispatch(setQuery(""))}>
             ×
           </button>
         )}
-        <span className="search__count">{filtered.length}/{items.length}</span>
+
+        <span className="search__count">
+          {items.length > 0 ? `${items.length} results` : ""}
+        </span>
       </div>
 
+      {loading && <Spinner />}
+      {error && <ErrorBox message={error} />}
+
       <ul className="list">
-        {filtered.map(item => (
+        {items.map((item) => (
           <li className="list-item" key={item.id}>
-            <MovieCard
-              id={item.id}
-              title={item.title}
-              year={item.year}
-              genres={item.genres}
-              plot={item.plot}
-            />
+            <MovieCard {...item} />
           </li>
         ))}
       </ul>
+
+      {!loading && query && items.length === 0 && (
+        <p>No results found for “{query}”.</p>
+      )}
     </>
   );
 }
