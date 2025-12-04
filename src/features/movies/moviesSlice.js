@@ -86,7 +86,6 @@ const moviesSlice = createSlice({
         state.errorList = action.error.message;
       })
 
-      // ---------- DETAILS ----------
       .addCase(fetchMovieById.pending, (state) => {
         state.loadingItem = true;
         state.errorItem = null;
